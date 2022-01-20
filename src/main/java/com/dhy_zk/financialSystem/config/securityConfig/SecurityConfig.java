@@ -79,6 +79,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter
         //jwt过滤器配置
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
+        http.headers().frameOptions().sameOrigin();
+
         //关闭csrf防护
         http.csrf().disable();
     }
