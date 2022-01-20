@@ -5,7 +5,6 @@ import com.dhy_zk.financialSystem.domain.Bank;
 import com.dhy_zk.financialSystem.mapper.BankMapper;
 import com.dhy_zk.financialSystem.service.IBankService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import jdk.nashorn.internal.ir.annotations.Reference;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
