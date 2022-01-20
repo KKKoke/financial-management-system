@@ -1,0 +1,22 @@
+spring:
+  datasource:                        #是否使用安全连接
+    #mysal 8驱动不同com.mysql.cj.jdbc.Driver,还需要增加时区的配置 serverTimezone=GMT%2B8
+    url: jdbc:mysql://110.40.155.17:3306/finance?userSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: root
+    password: 126433
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  thymeleaf:
+    cache: false
+server:
+  port: 80
+  servlet:
+    session:
+      cookie:
+        http-only: true
+jwt:
+  header: wrnm  #在请求头中的名字
+  secret: qnmd         #秘钥
+  expiration: 14400000    #过期时间:4h
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false
