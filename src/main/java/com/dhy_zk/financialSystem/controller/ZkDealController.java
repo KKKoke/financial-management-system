@@ -75,7 +75,6 @@ public class ZkDealController
         //增加映射
         BankWithDeal bankWithDeal = BankWithDeal.builder().b_id(bank.getId()).d_id(deal.getId()).build();
         bankWithDealService.save(bankWithDeal);
-       int i=1/0;
         return AjaxResponse.success();
     }
 
