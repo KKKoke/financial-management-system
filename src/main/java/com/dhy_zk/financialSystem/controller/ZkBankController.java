@@ -1,8 +1,10 @@
 package com.dhy_zk.financialSystem.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dhy_zk.financialSystem.domain.Bank;
 import com.dhy_zk.financialSystem.msg.AjaxResponse;
 import com.dhy_zk.financialSystem.service.IBankService;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,6 +46,9 @@ public class ZkBankController
     {
         boolean save=false;
         //银行卡不能重复
+        String num = bank.getNum();
+        Bank errorBank = iBankService.getOne(new QueryWrapper<Bank>().eq("num", num));
+        Assert.isNull(errorBank,"银行卡不能重复");
         synchronized (this)
         {
             save= iBankService.save(bank);

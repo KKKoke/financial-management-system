@@ -10,10 +10,12 @@ import com.dhy_zk.financialSystem.service.IBankWithDealService;
 import com.dhy_zk.financialSystem.service.IDealService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 
 /**
  * @author 大忽悠
@@ -52,23 +54,28 @@ public class ZkDealController
      * @return
      */
     @PostMapping("/deals")
+    @Transactional
     public synchronized AjaxResponse addOneDeal(BDvo bdvo)
     {
-        //增加一个交易
         Deal deal = new Deal();
         BeanUtils.copyProperties(bdvo,deal);
-        iDealService.save(deal);
 
         //银行卡余额更新
         Bank bank = new Bank(); bank.setId(bdvo.getBid());
         bank= bankService.getById(bank.getId());
         Assert.notNull(bank,"银行卡不存在");
         bank.setComputerBalance(bank.getComputerBalance().subtract(deal.getMoney()));
+        int res = bank.getComputerBalance().compareTo(new BigDecimal(0));
+        Assert.isTrue(res>=0,"余额不足");
         bankService.updateById(bank);
+
+        //增加一个交易
+        iDealService.save(deal);
 
         //增加映射
         BankWithDeal bankWithDeal = BankWithDeal.builder().b_id(bank.getId()).d_id(deal.getId()).build();
         bankWithDealService.save(bankWithDeal);
+       int i=1/0;
         return AjaxResponse.success();
     }
 
