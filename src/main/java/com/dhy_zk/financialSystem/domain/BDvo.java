@@ -144,4 +144,8 @@ public class BDvo
      */
     private String infoMark;
 
+    /**
+     * 收款人
+     */
+    private String receiver;
 }

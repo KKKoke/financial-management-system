@@ -10,6 +10,7 @@ import com.dhy_zk.financialSystem.service.IBankWithDealService;
 import com.dhy_zk.financialSystem.service.IDealService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
@@ -85,6 +86,7 @@ public class ZkDealController
      * @param id
      * @return
      */
+    @PreAuthorize("hasRole('SUPER')")
     @DeleteMapping("/deals")
     public synchronized AjaxResponse delOneDeal(@RequestParam Integer id)
     {
