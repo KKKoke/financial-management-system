@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dhy_zk.financialSystem.domain.Bank;
 import com.dhy_zk.financialSystem.msg.AjaxResponse;
 import com.dhy_zk.financialSystem.service.IBankService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +24,7 @@ import java.util.stream.Collectors;
  * @author 大忽悠
  * @create 2022/1/20 17:39
  */
+@Api(tags = "银行卡")
 @RestController
 public class ZkBankController
 {
@@ -33,6 +37,7 @@ public class ZkBankController
      * </p>
      * @return
      */
+    @ApiOperation("返回所有银行卡")
     @GetMapping("/banks")
     public AjaxResponse getAllBanks()
     {
@@ -46,6 +51,7 @@ public class ZkBankController
      * </p>
      * @return
      */
+    @ApiOperation("所有银行卡的汇总金额")
     @GetMapping("/totalMoney")
     public AjaxResponse getTotalNum()
     {
@@ -59,6 +65,7 @@ public class ZkBankController
      * </P>
      * @return
      */
+    @ApiOperation("列举所有大类银行，汇总每个大类银行的总金额")
     @GetMapping("/listBankOfTotalMoney")
     public AjaxResponse listAllBigBanks()
     {
@@ -78,6 +85,7 @@ public class ZkBankController
      * @param bank
      * @return
      */
+    @ApiOperation("增加一个银行卡")
     @PostMapping("/banks")
     public AjaxResponse addOneBankCard(Bank bank)
     {
@@ -97,6 +105,7 @@ public class ZkBankController
      * 查询当前银行卡上的所有消费记录
      * @return
      */
+    @ApiOperation("查询当前银行卡上的所有消费记录")
     @GetMapping("/infos")
     public AjaxResponse queryExtraInfo(@RequestParam String num)
     {
