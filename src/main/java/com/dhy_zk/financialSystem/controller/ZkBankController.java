@@ -46,7 +46,7 @@ public class ZkBankController
      * </p>
      * @return
      */
-    @GetMapping("/总金额")
+    @GetMapping("/totalMoney")
     public AjaxResponse getTotalNum()
     {
         BigDecimal bigDecimal = iBankService.list().stream().map(x -> x.getComputerBalance()).reduce(new BigDecimal(0), BigDecimal::add);
@@ -59,6 +59,7 @@ public class ZkBankController
      * </P>
      * @return
      */
+    @GetMapping("/listBankOfTotalMoney")
     public AjaxResponse listAllBigBanks()
     {
         List<BigDecimal> bankOfMoney=new ArrayList<>();
