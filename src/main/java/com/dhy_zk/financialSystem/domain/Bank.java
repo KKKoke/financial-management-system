@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import lombok.Builder;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

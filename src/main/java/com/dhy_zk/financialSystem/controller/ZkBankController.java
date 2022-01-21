@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author 大忽悠
@@ -32,6 +37,37 @@ public class ZkBankController
     public AjaxResponse getAllBanks()
     {
         return AjaxResponse.success(iBankService.list());
+    }
+
+
+    /**
+     * <p>
+     *     所有银行卡的汇总金额
+     * </p>
+     * @return
+     */
+    @GetMapping("/总金额")
+    public AjaxResponse getTotalNum()
+    {
+        BigDecimal bigDecimal = iBankService.list().stream().map(x -> x.getComputerBalance()).reduce(new BigDecimal(0), BigDecimal::add);
+        return AjaxResponse.success(bigDecimal);
+    }
+
+    /**
+     * <P>
+     *     列举所有大类银行，汇总每个大类银行的总金额
+     * </P>
+     * @return
+     */
+    public AjaxResponse listAllBigBanks()
+    {
+        List<BigDecimal> bankOfMoney=new ArrayList<>();
+        Map<String, List<Bank>> map = iBankService.list().stream().collect(Collectors.groupingBy(Bank::getBankName));
+        map.keySet().stream().forEach(bank->{
+            BigDecimal bigDemical = map.get(bank).stream().map(x -> x.getComputerBalance()).reduce(new BigDecimal(0), BigDecimal::add);
+            bankOfMoney.add(bigDemical);
+        });
+        return AjaxResponse.success(bankOfMoney);
     }
 
     /**
