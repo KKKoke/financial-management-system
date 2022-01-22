@@ -88,7 +88,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter
     @Override
     public void configure(WebSecurity web) {
         //将项目中静态资源路径开放出来
-        web.ignoring().antMatchers( "/css/**", "/fonts/**", "/img/**", "/js/**","/webjars/**",
+        web.ignoring().antMatchers( "/css/**", "/fonts/**", "/images/**", "/js/**","/webjars/**",
                 "/doc.html#/**","/swagger-resources","/v3/**");
     }
 
