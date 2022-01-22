@@ -48,7 +48,7 @@ function TOKEN_VERIFY()
         },
         error:function (res)
         {
-            alert("出现异常")
+            location.assign("login.html");
         }
     })
 }
