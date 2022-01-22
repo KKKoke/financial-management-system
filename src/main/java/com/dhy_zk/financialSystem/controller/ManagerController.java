@@ -6,6 +6,7 @@ import com.dhy_zk.financialSystem.msg.AjaxResponse;
 import com.dhy_zk.financialSystem.msg.CustomExceptionType;
 import com.dhy_zk.financialSystem.service.IManagerService;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -21,6 +22,10 @@ public class ManagerController
 {
     @Resource
     private IManagerService managerService;
+
+    @Resource
+    private BCryptPasswordEncoder passwordEncoder;;
+
 
     @GetMapping("/manager")
     public AjaxResponse getAllManagers()
@@ -65,7 +70,14 @@ public class ManagerController
     @PostMapping("/addOne")
     public AjaxResponse addOneManager(Manager manager)
     {
-        boolean b = managerService.save(manager);
+        //对密码进行加密操作
+        String encode = passwordEncoder.encode(manager.getPassword());
+        manager.setMpwd(encode);
+        boolean b=false;
+        synchronized (this)
+        {
+          b= managerService.save(manager);
+        }
         return AjaxResponse.success(b);
     }
 }
