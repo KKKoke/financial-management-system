@@ -6,10 +6,7 @@ import com.dhy_zk.financialSystem.msg.AjaxResponse;
 import com.dhy_zk.financialSystem.msg.CustomExceptionType;
 import com.dhy_zk.financialSystem.service.IManagerService;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -62,5 +59,13 @@ public class ManagerController
     {
         Manager manager = managerService.getOne(new QueryWrapper<Manager>().eq("mname", name));
         return AjaxResponse.success(manager);
+    }
+
+    @PreAuthorize("hasRole('SUPER')")
+    @PostMapping("/addOne")
+    public AjaxResponse addOneManager(Manager manager)
+    {
+        boolean b = managerService.save(manager);
+        return AjaxResponse.success(b);
     }
 }
