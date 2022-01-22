@@ -57,7 +57,7 @@ public class ZkDealController
      */
     @PostMapping("/deals")
     @Transactional
-    public synchronized AjaxResponse addOneDeal(BDvo bdvo)
+    public synchronized AjaxResponse addOneDeal(@RequestBody BDvo bdvo)
     {
         Deal deal = new Deal();
         BeanUtils.copyProperties(bdvo,deal);
