@@ -7,6 +7,7 @@ import com.dhy_zk.financialSystem.msg.CustomExceptionType;
 import com.dhy_zk.financialSystem.service.IManagerService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -68,7 +69,7 @@ public class ManagerController
 
     @PreAuthorize("hasRole('SUPER')")
     @PostMapping("/addOne")
-    public AjaxResponse addOneManager(Manager manager)
+    public AjaxResponse addOneManager(@Validated Manager manager)
     {
         //对密码进行加密操作
         String encode = passwordEncoder.encode(manager.getPassword());
