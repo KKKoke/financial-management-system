@@ -1,5 +1,6 @@
 package com.dhy_zk.financialSystem.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dhy_zk.financialSystem.domain.BDvo;
 import com.dhy_zk.financialSystem.domain.Bank;
 import com.dhy_zk.financialSystem.domain.BankWithDeal;
@@ -62,8 +63,9 @@ public class ZkDealController
         BeanUtils.copyProperties(bdvo,deal);
 
         //银行卡余额更新
-        Bank bank = new Bank(); bank.setId(bdvo.getBid());
-        bank= bankService.getById(bank.getId());
+        Bank bank = new Bank();
+        BeanUtils.copyProperties(bdvo,bank);
+        bank= bankService.getOne(new QueryWrapper<Bank>().eq("bankName",bank.getBankName()));
         Assert.notNull(bank,"银行卡不存在");
         bank.setComputerBalance(bank.getComputerBalance().subtract(deal.getMoney()));
         int res = bank.getComputerBalance().compareTo(new BigDecimal(0));
