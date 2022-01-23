@@ -88,35 +88,35 @@ layui.use(['table','form','layer'], function() {
 function addMember() {
     var mname = $("#mname").val();
     var mpwd = $("#mpwd").val();
-    if (mname === null || mpwd === null) {
+    if (mname === "" || mpwd === "") {
         alert("管理员姓名或密码不能为空");
         return;
     }
-    $.ajax({
-        url: '/addOne',
-        type: 'post',
-        headers: {
-            'wrnm':localStorage.wrnm
-        },
-        data: {
-            "mname": mname,
-            "mpwd": mpwd,
-            "type": $('#which input[name="status"]:checked ').val()
-        },
-        success:function (res)
-        {
-            if(res.code!=200)
+    else {
+        $.ajax({
+            url: '/addOne',
+            type: 'post',
+            headers: {
+                'wrnm':localStorage.wrnm
+            },
+            data: {
+                "mname": mname,
+                "mpwd": mpwd,
+                "type": $('#which input[name="status"]:checked ').val()
+            },
+            success:function (res)
             {
-                alert("你无权访问该资源")
+                if (res.code == 200) {
+                    alert("添加成功");
+                } else {
+                    alert("出现异常，请重试");
+                }
+            },
+            error:function (res) {
+                alert("出现异常，请重试");
             }
-            alert("添加成功");
-        },
-        error:function (res)
-        {
-            alert("出现异常，请重试");
-            return;
-        }
-    });
+        });
+    }
 }
 
 function delMember() {
@@ -130,11 +130,11 @@ function delMember() {
             "name": $("#mname").val(),
         },
         success: function (res) {
-            if (res.code != 200) {
-                alert("你无权访问该资源")
-                return;
+            if (res.code == 200) {
+                alert("删除成功");
+            } else {
+                alert("出现异常，请重试");
             }
-            alert("删除成功");
         },
         error: function (res) {
             alert("出现异常，请重试");

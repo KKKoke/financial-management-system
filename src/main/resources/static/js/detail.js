@@ -43,12 +43,6 @@ layui.use(['table','form','layer'], function() {
             case 'back':
                 window.location.href = "http://localhost/summaryBanks.html";
                 break;
-            case 'delete':
-                layer.msg('删除');
-                break;
-            case 'update':
-                layer.msg('编辑');
-                break;
         };
     });
 });

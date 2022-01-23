@@ -111,13 +111,13 @@ function total() {
         {
             if(res.code!=200)
             {
-                alert("你无权访问该资源")
+                alert("你无权访问该资源");
             }
             $("#total").html("<i class=\"iconfont left-nav-li\">&#xe70c;</i>汇总余额："+res.data+"");
         },
         error:function (res)
         {
-            alert("出现异常")
+            alert("出现异常");
         }
     });
 }

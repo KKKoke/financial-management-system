@@ -69,16 +69,16 @@ function addBank() {
         },
         success:function (res)
         {
-            if(res.code!=200)
+            if(res.code == 200)
             {
-                alert("你无权访问该资源")
+                alert("添加成功");
+            } else {
+                alert("出现异常，请重试");
             }
-            alert("添加成功");
         },
         error:function (res)
         {
             alert("出现异常，请重试");
-            return;
         }
     });
 }
