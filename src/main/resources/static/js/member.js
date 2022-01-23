@@ -18,7 +18,7 @@ layui.use(['table','form','layer'], function() {
                 ,{field: 'mpwd', title: '管理员密码', width: 250, templet:function(d){
                     return d.mpwd=='*'?'**********':'**********';}}
                 ,{field: 'type', title: '权限',width: 250, templet:function(d){
-                    return d.type=='0'?'普通管理员':'超级普通管理员';}}
+                    return d.type=='0'?'普通管理员':'超级管理员';}}
             ]
         ]
         , id: 'tableOne'
@@ -56,7 +56,7 @@ layui.use(['table','form','layer'], function() {
                     ,{field: 'mpwd', title: '管理员密码', width: 250, templet:function(d){
                         return d.mpwd=='*'?'**********':'**********';}}
                     ,{field: 'type', title: '权限',width: 250, templet:function(d){
-                        return d.type=='0'?'普通管理员':'超级普通管理员';}}
+                        return d.type=='0'?'普通管理员':'超级管理员';}}
                 ]
             ]
             , page: {
@@ -86,6 +86,12 @@ layui.use(['table','form','layer'], function() {
 // }
 
 function addMember() {
+    var mname = $("#mname").val();
+    var mpwd = $("#mpwd").val();
+    if (mname === null || mpwd === null) {
+        alert("管理员姓名或密码不能为空");
+        return;
+    }
     $.ajax({
         url: '/addOne',
         type: 'post',
@@ -93,8 +99,8 @@ function addMember() {
             'wrnm':localStorage.wrnm
         },
         data: {
-            "mname": $("#mname").val(),
-            "mpwd": $("#mpwd").val(),
+            "mname": mname,
+            "mpwd": mpwd,
             "type": $('#which input[name="status"]:checked ').val()
         },
         success:function (res)
