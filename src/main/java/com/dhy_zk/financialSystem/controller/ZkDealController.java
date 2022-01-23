@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.HashMap;
 
 /**
  * @author 大忽悠
@@ -57,7 +58,7 @@ public class ZkDealController
      */
     @PostMapping("/deals")
     @Transactional
-    public synchronized AjaxResponse addOneDeal(@RequestBody BDvo bdvo)
+    public synchronized AjaxResponse addOneDeal(BDvo bdvo)
     {
         Deal deal = new Deal();
         BeanUtils.copyProperties(bdvo,deal);
@@ -65,13 +66,25 @@ public class ZkDealController
         //银行卡余额更新
         Bank bank = new Bank();
         BeanUtils.copyProperties(bdvo,bank);
-        bank= bankService.getOne(new QueryWrapper<Bank>().eq("bankName",bank.getBankName()));
+        //通过银行卡加卡号确认
+        bank= bankService.getOne(new QueryWrapper<Bank>().eq("bankName",bank.getBankName()).eq("num",bank.getNum()));
         Assert.notNull(bank,"银行卡不存在");
         bank.setComputerBalance(bank.getComputerBalance().subtract(deal.getMoney()));
         int res = bank.getComputerBalance().compareTo(new BigDecimal(0));
         Assert.isTrue(res>=0,"余额不足");
+        //信息余额也需要减
+        bank.setInfoBalance(bank.getInfoBalance().subtract(deal.getMoney()));
+        res = bank.getComputerBalance().compareTo(new BigDecimal(0));
+        Assert.isTrue(res>=0,"余额不足");
+        //计算余额差
+        BigDecimal subtract = bank.getComputerBalance().subtract(bank.getInfoBalance());
+        bank.setReduceBalance(subtract.abs());
         bankService.updateById(bank);
-
+        //计算余款--前提是两个值都存在
+        if(deal.getExpectMoney()!=null&&deal.getRealMoney()!=null)
+        {
+            deal.setLeftMoney(deal.getRealMoney().subtract(deal.getExpectMoney()));
+        }
         //增加一个交易
         iDealService.save(deal);
 
@@ -90,12 +103,18 @@ public class ZkDealController
      */
     @PreAuthorize("hasRole('SUPER')")
     @DeleteMapping("/deals")
+    @Transactional
     public synchronized AjaxResponse delOneDeal(@RequestParam Integer id)
     {
         boolean removeById;
          synchronized (this)
          {
+             //删除订单
              removeById  = iDealService.removeById(id);
+            //删除映射关系
+             HashMap<String, Object> hashMap = new HashMap<>();
+             hashMap.put("d_id",id);
+             bankWithDealService.removeByMap(hashMap);
          }
         return AjaxResponse.success(removeById);
     }

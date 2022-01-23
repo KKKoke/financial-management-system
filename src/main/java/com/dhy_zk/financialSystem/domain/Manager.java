@@ -6,16 +6,15 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collection;
 
-import com.dhy_zk.financialSystem.config.anno.NotSuper;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
-import javax.validation.constraints.AssertTrue;
+
+
+import javax.validation.constraints.NotNull;
 
 /**
  * <p>
@@ -37,18 +36,23 @@ public class Manager implements Serializable, UserDetails {
     /**
      * 管理员名字
      */
+    @NotEmpty
+    @NotNull
     private String mname;
 
     /**
      * 管理员密码
      */
+    @NotEmpty
+    @NotNull
     private String mpwd;
 
     /**
      * 1:超级管理员 0：普通管理员
-     * 不能创建超级管理员
+     * 不能创建超级管理员--先放开
      */
-    @NotSuper
+    //@NotSuper
+    @NotNull
     private Integer type;
 
 

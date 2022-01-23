@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -22,4 +23,5 @@ public interface IDealService extends IService<Deal> {
 
     List<BDvo> listBD();
 
+    Map<String, BigDecimal> getAllCompanyDebts();
 }
