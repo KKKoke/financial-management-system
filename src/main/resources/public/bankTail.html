@@ -12,7 +12,10 @@
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/detail.js"></script>
     <script type="text/javascript" src="js/summary.js"></script>
-
+    <script src="js/token.js"></script>
+    <script>
+        TOKEN_VERIFY();
+    </script>
 </head>
 <body>
 <div class="x-nav">
@@ -57,30 +60,7 @@
     </div>
 </div>
 </body>
-<script>
-    function total() {
-        $.ajax({
-            url: '/totalMoney',
-            type: 'get',
-            headers: {
-                'wrnm':localStorage.wrnm
-            },
-            data: {},
-            success:function (res)
-            {
-                if(res.code!=200)
-                {
-                    alert("你无权访问该资源")
-                }
-                $("#total").html("<i class=\"iconfont left-nav-li\">&#xe70c;</i>汇总余额："+res.data+"");
-            },
-            error:function (res)
-            {
-                alert("出现异常")
-            }
-        });
-    }
-</script>
+<script type="text/javascript" src="js/jquery.js"></script>
 <script>var _hmt = _hmt || []; (function() {
     var hm = document.createElement("script");
     hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";

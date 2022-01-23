@@ -11,8 +11,11 @@
     <script src="./lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="./js/index.js"></script>
     <script type="text/javascript" src="js/member.js"></script>
-
-    <!--<script type="text/javascript" src="./verify.js"></script>-->
+<!--    <script type="text/javascript" src="js/layui.js"></script>-->
+    <script src="js/token.js"></script>
+    <script>
+        TOKEN_VERIFY();
+    </script>
 </head>
 <body>
 <div class="x-nav">
@@ -30,184 +33,18 @@
         <div class="layui-col-md12">
             <form class="layui-form">
                 <div class="layui-form-item">
-                    <label for="remark" class="layui-form-label">
-                        <span class="x-red">*</span>注明</label>
+                    <label for="name" class="layui-form-label">
+                        <span class="x-red">*</span>输入用户名</label>
                     <div class="layui-input-inline">
-                        <input type="text" id="remark" required="" autocomplete="off" class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="paytime" class="layui-form-label">
-                        <span class="x-red">*</span>到账时间</label>
-                    <div class="layui-input-inline">
-                        <!--                    <input type="text" id="paytime" required="" lay-verify="pass" autocomplete="off"-->
-                        <!--                           class="layui-input"></div>-->
-                        <input type="text" class="layui-input" id="paytime"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="company" class="layui-form-label">
-                        <span class="x-red">*</span>业务相关单位</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="company" required="" autocomplete="off" class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="handler" class="layui-form-label">
-                        <span class="x-red">*</span>汇款单位经办人</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="handler" required="" lay-verify="pass" autocomplete="off"
-                               class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="payee" class="layui-form-label">
-                        <span class="x-red">*</span>收款单位</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="payee" required="" autocomplete="off" class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="receivePeo" class="layui-form-label">
-                        <span class="x-red">*</span>收款人</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="receivePeo" required="" lay-verify="pass" autocomplete="off"
-                               class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="item" class="layui-form-label">
-                        <span class="x-red">*</span>用项</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="item" required="" autocomplete="off" class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="detail" class="layui-form-label">
-                        <span class="x-red">*</span>品名</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="detail" required="" lay-verify="pass" autocomplete="off"
-                               class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="payType" class="layui-form-label">
-                        <span class="x-red">*</span>收支</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="payType" required="" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="bankName" class="layui-form-label">
-                        <span class="x-red">*</span>银行名称</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="bankName" required="" lay-verify="pass"
-                               autocomplete="off" class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="num" class="layui-form-label">
-                        <span class="x-red">*</span>卡号</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="num" required="" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="money" class="layui-form-label">
-                        <span class="x-red">*</span>金额</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="money" required="" lay-verify="pass"
-                               autocomplete="off" class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="cash" class="layui-form-label">
-                        <span class="x-red">*</span>现金收支</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="cash" required="" autocomplete="off"
-                               class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="computerBalance" class="layui-form-label">
-                        <span class="x-red">*</span>电脑余额</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="computerBalance" required=""
-                               lay-verify="pass" autocomplete="off" class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="infoBalance" class="layui-form-label">
-                        <span class="x-red">*</span>信息余额</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="infoBalance" required=""
-                               lay-verify="pass" autocomplete="off" class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="reduceBalance" class="layui-form-label">
-                        <span class="x-red">*</span>余额差</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="reduceBalance" required=""
-                               lay-verify="pass" autocomplete="off" class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="receiver" class="layui-form-label">
-                        <span class="x-red">*</span>收货人</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="receiver" required=""
-                               lay-verify="pass" autocomplete="off" class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="byPeo" class="layui-form-label">
-                        <span class="x-red">*</span>经办人</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="byPeo" required=""
-                               lay-verify="pass" autocomplete="off" class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="unitPrice" class="layui-form-label">
-                        <span class="x-red">*</span>单价</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="unitPrice" required=""
-                               lay-verify="pass" autocomplete="off" class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="number" class="layui-form-label">
-                        <span class="x-red">*</span>数量</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="number" required=""
-                               lay-verify="pass" autocomplete="off" class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="unit" class="layui-form-label">
-                        <span class="x-red">*</span>单位</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="unit" required=""
-                               lay-verify="pass" autocomplete="off" class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="expectMoney" class="layui-form-label">
-                        <span class="x-red">*</span>应收金额</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="expectMoney" required=""
-                               lay-verify="pass" autocomplete="off" class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="realMoney" class="layui-form-label">
-                        <span class="x-red">*</span>实收金额</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="realMoney" required=""
-                               lay-verify="pass" autocomplete="off" class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="leftMoney" class="layui-form-label">
-                        <span class="x-red">*</span>余款</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="leftMoney" required=""
-                               lay-verify="pass" autocomplete="off" class="layui-input"></div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="infoMark" class="layui-form-label">
-                        <span class="x-red">*</span>备注</label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="infoMark" required=""
-                               lay-verify="pass" autocomplete="off" class="layui-input"></div>
+                        <input type="text" id="name" required="" autocomplete="off" class="layui-input"></div>
                 </div>
             </form>
-            <button class="layui-btn" onclick="searchDeal()" style="margin-left:30px"><i class="layui-icon"></i>查找交易</button>
+            <button class="layui-btn" onclick="searchMember()" style="margin-left:30px"><i class="layui-icon"></i>查找</button>
             <div class="layui-card">
                 <script type="text/html" id="toolbar">
                 </script>
                 <div class="layui-card-body layui-table-main layui-table-body">
-                    <table id="searchDealData" class="layui-table layui-form" lay-filter="info">
+                    <table id="searchMemberData" class="layui-table layui-form" lay-filter="info">
                     </table>
                 </div>
             </div>
@@ -215,4 +52,67 @@
     </div>
 </div>
 </body>
+<script type="text/javascript" src="js/layui.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script>
+    function searchMember() {
+        layui.use(['table'], function() {
+            var table = layui.table;
+            table.render({
+                elem: '#searchMemberData'
+                , height: 600
+                , url: '/managerByExample'
+                , method: 'get'
+                , where: {
+                    "name": $("#name").val()
+                }
+                , cols: [
+                    [ //表头
+                        {field: 'id', title: '编号', width:250, sort: true, fixed: 'left'}
+                        ,{field: 'mname', title: '管理员姓名',width: 250}
+                        ,{field: 'mpwd', title: '管理员密码', width: 250, templet:function(d){
+                            return d.mpwd=='*'?'**********':'**********';}}
+                        ,{field: 'type', title: '权限',width: 250, templet:function(d){
+                            return d.type=='0'?'普通管理员':'超级普通管理员';}}
+                    ]
+                ]
+                , toolbar: '#toolbar'
+                , page: true //开启分页
+                , limits: [3, 5, 10]  //一页选择显示3,5或10条数据
+                , limit: 10  //一页显示10条数据
+                , parseData: function (res) { //将原始数据解析成 table 组件所规定的数据，res为从url中get到的数据
+                    var result;
+                    if (this.page.curr) {
+                        result = res.data.slice(this.limit * (this.page.curr - 1), this.limit * this.page.curr);
+                    } else {
+                        result = res.data.slice(0, this.limit);
+                    }
+                    return {
+                        "code": 0, //解析接口状态
+                        "msg": "ok", //解析提示文本
+                        "count": res.data.length, //解析数据长度
+                        "data": result //解析数据列表
+                    };
+                }
+            });
+        });
+        // //
+        // layui.table.reload('DealData',{
+        //     where:{
+        //         name: $("#name").val()
+        //     }
+        // })
+        // layui.table.reload('memberData', {
+        //     url: '/managerByExample',
+        //     method:'get'
+        //     ,where:
+        //         {
+        //             name : $("#name").val()
+        //         }
+        //     ,page: {
+        //         curr: 1 //重新从第 1 页开始
+        //     }
+        // }); //只重载数据
+    }
+</script>
 </html>

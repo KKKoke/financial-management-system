@@ -82,61 +82,6 @@ layui.use(['table','form','layer'], function(){
             });
         });
     });
-
-
-
-    //管理员删除事件
-    table.on('tool(managerFilter)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
-        var data = obj.data; //获得当前行数据
-        var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-        var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
-
-        if(layEvent === 'del')
-        {
-            //删除管理员
-            var del_index=layer.confirm('确认删除管理员？', {
-                btn: ['确认', '取消']
-                ,yes: function(index, layero)
-                {
-                    $.ajax({
-                        url:'del_one_manager',
-                        type:'post',
-                        data:{"m_id": data.id,token:window.localStorage.managerToken},
-                        success: function (res)
-                        {
-                            obj.del();
-                            layer.msg("删除成功",{icon:1})
-                            layer.close(index);
-                        },
-                        error: function ()
-                        {
-                            layer.msg("删除失败",{icon:5})
-                        }
-                    })
-                }
-            });
-            layer.title("<font color=red>删除管理员</font>",del_index)
-        }
-    });
-
-    //搜索管理员
-    $("#man_search").click(function (){
-        //表格重载实现搜索功能
-        //上述方法等价于
-        table.reload('managerData',
-            {
-                url: 'get_target_manager',
-                method:'post'
-                ,where:
-                    {
-                        m_name : $("#man_name").val(),
-                        token: window.localStorage.managerToken
-                    }
-                ,page: {
-                    curr: 1 //重新从第 1 页开始
-                }
-            }); //只重载数据
-    })
 });
 
 function enterBank() {
@@ -152,4 +97,27 @@ function enterBank() {
 
 function showDeal() {
     window.location.href = "http://localhost/tradeInfo.html";
+}
+
+function total() {
+    $.ajax({
+        url: '/totalMoney',
+        type: 'get',
+        headers: {
+            'wrnm':localStorage.wrnm
+        },
+        data: {},
+        success:function (res)
+        {
+            if(res.code!=200)
+            {
+                alert("你无权访问该资源")
+            }
+            $("#total").html("<i class=\"iconfont left-nav-li\">&#xe70c;</i>汇总余额："+res.data+"");
+        },
+        error:function (res)
+        {
+            alert("出现异常")
+        }
+    });
 }
