@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="./css/index.css">
     <script src="./lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="./js/index.js"></script>
-    <script type="text/javascript" src="js/tradeInfo.js"></script>
     <script type="text/javascript" src="js/member.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
     <script src="js/token.js"></script>
     <script>
         TOKEN_VERIFY();
@@ -38,7 +38,8 @@
                             <input type="text" id="name" name="name"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
-                            <div class="layui-btn" lay-filter="search" onclick="searchMember()"><i class="layui-icon">&#xe615;</i></div>
+<!--                            <div class="layui-btn" lay-filter="search" onclick="searchMember()"><i class="layui-icon">&#xe615;</i></div>-->
+                            <div class="layui-btn" lay-filter="search" id="do_search"><i class="layui-icon">&#xe615;</i></div>
                         </div>
                     </form>
                 </div>
