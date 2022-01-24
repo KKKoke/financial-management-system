@@ -66,20 +66,26 @@ public class ZkDealController
         //银行卡余额更新
         Bank bank = new Bank();
         BeanUtils.copyProperties(bdvo,bank);
-        //通过银行卡加卡号确认
-        bank= bankService.getOne(new QueryWrapper<Bank>().eq("bankName",bank.getBankName()).eq("num",bank.getNum()));
-        Assert.notNull(bank,"银行卡不存在");
-        bank.setComputerBalance(bank.getComputerBalance().subtract(deal.getMoney()));
-        int res = bank.getComputerBalance().compareTo(new BigDecimal(0));
-        Assert.isTrue(res>=0,"余额不足");
-        //信息余额也需要减
-        bank.setInfoBalance(bank.getInfoBalance().subtract(deal.getMoney()));
-        res = bank.getComputerBalance().compareTo(new BigDecimal(0));
-        Assert.isTrue(res>=0,"余额不足");
-        //计算余额差
-        BigDecimal subtract = bank.getComputerBalance().subtract(bank.getInfoBalance());
-        bank.setReduceBalance(subtract.abs());
+        bank.setId(bdvo.getBid());
+
+        //通过银行卡或者现金名字加上对应的id确认唯一的记录
+        bank= bankService.getOne(new QueryWrapper<Bank>().eq("bankName",bank.getBankName()).eq("id",bank.getId()));
+        Assert.notNull(bank,"银行卡或指定现金卡不存在");
+
+        //如果是银行卡
+        if(!bank.getBankName().equals("现金"))
+        {
+            //如果输入的信息余额和保存的电脑余额不一致，就更新电脑余额
+            if(bank.getComputerBalance().compareTo(bdvo.getInfoBalance())!=0)
+            {
+                bank.setComputerBalance(bdvo.getInfoBalance());
+            }
+        }
+
+        updateBankState(bank,bdvo.getPayType(),deal,bdvo);
+
         bankService.updateById(bank);
+
         //计算余款--前提是两个值都存在
         if(deal.getExpectMoney()!=null&&deal.getRealMoney()!=null)
         {
@@ -93,6 +99,49 @@ public class ZkDealController
         bankWithDealService.save(bankWithDeal);
         return AjaxResponse.success();
     }
+
+    /**
+     * <p>
+     *     增加一条交易的时候，更新对应的银行卡或者现金卡状态
+     * </p>
+     * @param bank
+     */
+    private void updateBankState(Bank bank,int payType,Deal deal,BDvo bdvo)
+    {
+        BigDecimal sign=null;
+        //收入
+        if(payType==1)
+        {
+          sign=new BigDecimal(1);
+        }
+        //支出
+        if(payType==0)
+        {
+            sign=new BigDecimal(-1);
+        }
+        else
+        {
+            throw  new IllegalArgumentException("参数异常");
+        }
+
+        //更新电脑余额
+        bank.setComputerBalance(bank.getComputerBalance().add(deal.getMoney().multiply(sign)));
+        //判断钱还够不够
+        int res = bank.getComputerBalance().compareTo(new BigDecimal(0));
+        Assert.isTrue(res>=0,"余额不足");
+
+        if(!bank.getBankName().equals("现金"))
+        {
+            //对信息金额进行更新
+            bank.setInfoBalance(bdvo.getInfoBalance().add(deal.getMoney().multiply(sign)));
+            res = bank.getComputerBalance().compareTo(new BigDecimal(0));
+            Assert.isTrue(res>=0,"余额不足");
+            //计算余额差
+            BigDecimal subtract = bank.getComputerBalance().subtract(bank.getInfoBalance());
+            bank.setReduceBalance(subtract.abs());
+        }
+    }
+
 
     /**
      * <p>
