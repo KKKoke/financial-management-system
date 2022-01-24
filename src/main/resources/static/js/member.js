@@ -49,41 +49,24 @@ layui.use(['table','form','layer'], function() {
             , where: {
                 'name': $('#name').val()
             }
-            , cols: [
-                [ //表头
-                    {field: 'id', title: '编号', width:250, sort: true, fixed: 'left'}
-                    ,{field: 'mname', title: '管理员姓名',width: 250}
-                    ,{field: 'mpwd', title: '管理员密码', width: 250, templet:function(d){
-                        return d.mpwd=='*'?'**********':'**********';}}
-                    ,{field: 'type', title: '权限',width: 250, templet:function(d){
-                        return d.type=='0'?'普通管理员':'超级管理员';}}
-                ]
-            ]
             , page: {
                 curr: 1
+            }
+            , parseData: function (res) { //将原始数据解析成 table 组件所规定的数据，res为从url中get到的数据
+                console.log(res);
+                console.log(res.data)
+                var array = new Array(res.data);
+                console.log(array);
+                return {
+                    "code": 0, //解析接口状态
+                    "msg": "ok", //解析提示文本
+                    "count": 1, //解析数据长度
+                    "data": array //解析数据列表
+                };
             }
         });
     });
 });
-
-// function searchMember() {
-//     // layui.table.reload('memberData',{
-//     //     where:{
-//     //         name: $("#name").val()
-//     //     }
-//     // })
-//     layui.table.reload('memberData', {
-//         url: '/managerByExample',
-//         method:'get'
-//         ,where:
-//             {
-//                 name : $("#name").val()
-//             }
-//         ,page: {
-//             curr: 1 //重新从第 1 页开始
-//         }
-//     }); //只重载数据
-// }
 
 function addMember() {
     var mname = $("#mname").val();
