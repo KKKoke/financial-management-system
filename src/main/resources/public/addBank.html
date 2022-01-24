@@ -44,14 +44,18 @@
                 <label for="num" class="layui-form-label">
                     <span class="x-red">*</span>卡号</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="num" required="" lay-verify="pass" autocomplete="off" class="layui-input"></div>
+                    <input type="text" id="num" required="" lay-verify="pass" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>银行卡后四位
+                </div>
             </div>
-            <div class="layui-form-item">
-                <label for="reduceBalance" class="layui-form-label">
-                    <span class="x-red">*</span>余额差</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="reduceBalance" required="" lay-verify="pass" autocomplete="off" class="layui-input"></div>
-            </div>
+<!--            <div class="layui-form-item">-->
+<!--                <label for="reduceBalance" class="layui-form-label">-->
+<!--                    <span class="x-red">*</span>余额差</label>-->
+<!--                <div class="layui-input-inline">-->
+<!--                    <input type="text" id="reduceBalance" required="" lay-verify="pass" autocomplete="off" class="layui-input"></div>-->
+<!--            </div>-->
         </form>
         <button class="layui-btn" onclick="addBank()" style="margin-left:30px"><i class="layui-icon"></i>添加</button>
     </div>

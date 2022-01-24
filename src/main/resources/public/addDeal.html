@@ -24,8 +24,7 @@
     <div class="layui-row">
         <form class="layui-form">
             <div class="layui-form-item">
-                <label for="remark" class="layui-form-label">
-                    <span class="x-red">*</span>注明</label>
+                <label for="remark" class="layui-form-label">注明</label>
                 <div class="layui-input-inline">
                     <input type="text" id="remark" required="" autocomplete="off" class="layui-input"></div>
             </div>
@@ -42,48 +41,63 @@
                     <input type="text" id="company" required="" autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
-                <label for="handler" class="layui-form-label">
-                    <span class="x-red">*</span>汇款单位经办人</label>
+                <label for="handler" class="layui-form-label">汇款单位经办人</label>
                 <div class="layui-input-inline">
                     <input type="text" id="handler" required="" lay-verify="pass" autocomplete="off"
                            class="layui-input"></div>
             </div>
             <div class="layui-form-item">
-                <label for="payee" class="layui-form-label">
-                    <span class="x-red">*</span>收款单位</label>
+                <label for="payee" class="layui-form-label">收款单位</label>
                 <div class="layui-input-inline">
                     <input type="text" id="payee" required="" autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
-                <label for="receivePeo" class="layui-form-label">
-                    <span class="x-red">*</span>收款人</label>
+                <label for="receivePeo" class="layui-form-label">收款人</label>
                 <div class="layui-input-inline">
                     <input type="text" id="receivePeo" required="" lay-verify="pass" autocomplete="off"
                            class="layui-input"></div>
             </div>
             <div class="layui-form-item">
-                <label for="item" class="layui-form-label">
-                    <span class="x-red">*</span>用项</label>
+                <label for="item" class="layui-form-label">用项</label>
                 <div class="layui-input-inline">
                     <input type="text" id="item" required="" autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
-                <label for="detail" class="layui-form-label">
-                    <span class="x-red">*</span>品名</label>
+                <label for="detail" class="layui-form-label">品名</label>
                 <div class="layui-input-inline">
                     <input type="text" id="detail" required="" lay-verify="pass" autocomplete="off"
                            class="layui-input"></div>
             </div>
+<!--            <div class="layui-form-item">-->
+<!--                <label for="payType" class="layui-form-label">收支</label>-->
+<!--                <div class="layui-input-inline">-->
+<!--                    <input type="text" id="payType" placeholder="请选择" value="" readonly="" class="layui-input layui-unselect">-->
+<!--                    <i class="layui-edge"></i>-->
+<!--                    <dl class="layui-anim layui-anim-upbit" style=""><dd lay-value="1" class="layui-this">顶部居左水印</dd><dd lay-value="2" class="">顶部居中水印</dd><dd lay-value="3" class="">顶部居右水印</dd><dd lay-value="4" class="">左居中水印</dd><dd lay-value="5" class="">居中水印</dd><dd lay-value="6" class="">右居中水印</dd><dd lay-value="7" class="">底部居左水印</dd><dd lay-value="8" class="">底部居中水印</dd><dd lay-value="9" class="">底部居右水印</dd></dl>-->
+<!--&lt;!&ndash;                    <input type="text" id="payType" required="" autocomplete="off" class="layui-input">&ndash;&gt;-->
+<!--                </div>-->
+<!--            </div>-->
             <div class="layui-form-item">
-                <label for="payType" class="layui-form-label">
-                    <span class="x-red">*</span>收支</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="payType" required="" autocomplete="off" class="layui-input">
+                <label class="layui-form-label">收支</label>
+                <div class="layui-input-block">
+                    <select name="payType" id="payType" lay-filter="position">
+                        <option value="1">收入</option>
+                        <option value="0">支出</option>
+                    </select>
+                    <div class="layui-unselect layui-form-select layui-form-selected">
+                        <div class="layui-select-title">
+                            <input type="text" placeholder="请选择" value="顶部居左水印" readonly="" class="layui-input layui-unselect">
+                            <i class="layui-edge"></i>
+                        </div>
+                        <dl class="layui-anim layui-anim-upbit" style="">
+                            <dd lay-value="1" class="layui-this">收入</dd>
+                            <dd lay-value="0" class="">支出</dd>
+                        </dl>
+                    </div>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label for="bankName" class="layui-form-label">
-                    <span class="x-red">*</span>银行名称</label>
+                <label for="bankName" class="layui-form-label">银行名称</label>
                 <div class="layui-input-inline">
                     <input type="text" id="bankName" required="" lay-verify="pass"
                            autocomplete="off" class="layui-input"></div>
@@ -94,6 +108,9 @@
                 <div class="layui-input-inline">
                     <input type="text" id="num" required="" autocomplete="off" class="layui-input">
                 </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>银行卡后四位
+                </div>
             </div>
             <div class="layui-form-item">
                 <label for="money" class="layui-form-label">
@@ -103,19 +120,18 @@
                            autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
-                <label for="cash" class="layui-form-label">
-                    <span class="x-red">*</span>现金收支</label>
+                <label for="cash" class="layui-form-label">现金收支</label>
                 <div class="layui-input-inline">
                     <input type="text" id="cash" required="" autocomplete="off"
                            class="layui-input"></div>
             </div>
-            <div class="layui-form-item">
-                <label for="computerBalance" class="layui-form-label">
-                    <span class="x-red">*</span>电脑余额</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="computerBalance" required=""
-                           lay-verify="pass" autocomplete="off" class="layui-input"></div>
-            </div>
+<!--            <div class="layui-form-item">-->
+<!--                <label for="computerBalance" class="layui-form-label">-->
+<!--                    <span class="x-red">*</span>电脑余额</label>-->
+<!--                <div class="layui-input-inline">-->
+<!--                    <input type="text" id="computerBalance" required=""-->
+<!--                           lay-verify="pass" autocomplete="off" class="layui-input"></div>-->
+<!--            </div>-->
             <div class="layui-form-item">
                 <label for="infoBalance" class="layui-form-label">
                     <span class="x-red">*</span>信息余额</label>
@@ -123,72 +139,63 @@
                     <input type="text" id="infoBalance" required=""
                            lay-verify="pass" autocomplete="off" class="layui-input"></div>
             </div>
+<!--            <div class="layui-form-item">-->
+<!--                <label for="reduceBalance" class="layui-form-label">-->
+<!--                    <span class="x-red">*</span>余额差</label>-->
+<!--                <div class="layui-input-inline">-->
+<!--                    <input type="text" id="reduceBalance" required=""-->
+<!--                           lay-verify="pass" autocomplete="off" class="layui-input"></div>-->
+<!--            </div>-->
             <div class="layui-form-item">
-                <label for="reduceBalance" class="layui-form-label">
-                    <span class="x-red">*</span>余额差</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="reduceBalance" required=""
-                           lay-verify="pass" autocomplete="off" class="layui-input"></div>
-            </div>
-            <div class="layui-form-item">
-                <label for="receiver" class="layui-form-label">
-                    <span class="x-red">*</span>收货人</label>
+                <label for="receiver" class="layui-form-label">收货人</label>
                 <div class="layui-input-inline">
                     <input type="text" id="receiver" required=""
                            lay-verify="pass" autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
-                <label for="byPeo" class="layui-form-label">
-                    <span class="x-red">*</span>经办人</label>
+                <label for="byPeo" class="layui-form-label">经办人</label>
                 <div class="layui-input-inline">
                     <input type="text" id="byPeo" required=""
                            lay-verify="pass" autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
-                <label for="unitPrice" class="layui-form-label">
-                    <span class="x-red">*</span>单价</label>
+                <label for="unitPrice" class="layui-form-label">单价</label>
                 <div class="layui-input-inline">
                     <input type="text" id="unitPrice" required=""
                            lay-verify="pass" autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
-                <label for="number" class="layui-form-label">
-                    <span class="x-red">*</span>数量</label>
+                <label for="number" class="layui-form-label">数量</label>
                 <div class="layui-input-inline">
                     <input type="text" id="number" required=""
                            lay-verify="pass" autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
-                <label for="unit" class="layui-form-label">
-                    <span class="x-red">*</span>单位</label>
+                <label for="unit" class="layui-form-label">单位</label>
                 <div class="layui-input-inline">
                     <input type="text" id="unit" required=""
                            lay-verify="pass" autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
-                <label for="expectMoney" class="layui-form-label">
-                    <span class="x-red">*</span>应收金额</label>
+                <label for="expectMoney" class="layui-form-label">应收金额</label>
                 <div class="layui-input-inline">
                     <input type="text" id="expectMoney" required=""
                            lay-verify="pass" autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
-                <label for="realMoney" class="layui-form-label">
-                    <span class="x-red">*</span>实收金额</label>
+                <label for="realMoney" class="layui-form-label">实收金额</label>
                 <div class="layui-input-inline">
                     <input type="text" id="realMoney" required=""
                            lay-verify="pass" autocomplete="off" class="layui-input"></div>
             </div>
+<!--            <div class="layui-form-item">-->
+<!--                <label for="leftMoney" class="layui-form-label">余款</label>-->
+<!--                <div class="layui-input-inline">-->
+<!--                    <input type="text" id="leftMoney" required=""-->
+<!--                           lay-verify="pass" autocomplete="off" class="layui-input"></div>-->
+<!--            </div>-->
             <div class="layui-form-item">
-                <label for="leftMoney" class="layui-form-label">
-                    <span class="x-red">*</span>余款</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="leftMoney" required=""
-                           lay-verify="pass" autocomplete="off" class="layui-input"></div>
-            </div>
-            <div class="layui-form-item">
-                <label for="infoMark" class="layui-form-label">
-                    <span class="x-red">*</span>备注</label>
+                <label for="infoMark" class="layui-form-label">备注</label>
                 <div class="layui-input-inline">
                     <input type="text" id="infoMark" required=""
                            lay-verify="pass" autocomplete="off" class="layui-input"></div>
