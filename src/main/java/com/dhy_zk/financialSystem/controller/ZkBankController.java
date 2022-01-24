@@ -44,6 +44,13 @@ public class ZkBankController
         return AjaxResponse.success(iBankService.list());
     }
 
+    @ApiOperation("返回当前银行名称下的所有银行")
+    @GetMapping("/banks")
+    public AjaxResponse getBanksUnderNowBankName(@RequestParam String bankName)
+    {
+        return AjaxResponse.success(iBankService.list(new QueryWrapper<Bank>().eq("bankName",bankName)));
+    }
+
 
     /**
      * <p>

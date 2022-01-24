@@ -115,7 +115,7 @@ public class ZkDealController
           sign=new BigDecimal(1);
         }
         //支出
-        if(payType==0)
+        else if(payType==0)
         {
             sign=new BigDecimal(-1);
         }
@@ -134,7 +134,7 @@ public class ZkDealController
         {
             //对信息金额进行更新
             bank.setInfoBalance(bdvo.getInfoBalance().add(deal.getMoney().multiply(sign)));
-            res = bank.getComputerBalance().compareTo(new BigDecimal(0));
+            res = bank.getInfoBalance().compareTo(new BigDecimal(0));
             Assert.isTrue(res>=0,"余额不足");
             //计算余额差
             BigDecimal subtract = bank.getComputerBalance().subtract(bank.getInfoBalance());
