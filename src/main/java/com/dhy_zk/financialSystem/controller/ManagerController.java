@@ -7,6 +7,7 @@ import com.dhy_zk.financialSystem.msg.CustomExceptionType;
 import com.dhy_zk.financialSystem.service.IManagerService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.util.Assert;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,7 +58,7 @@ public class ManagerController
                 remove = managerService.removeByMap(hashMap);
             }
         }
-        return remove?AjaxResponse.success():AjaxResponse.error(CustomExceptionType.SYSTEM_ERROR,"del error");
+        return remove?AjaxResponse.success():AjaxResponse.error(CustomExceptionType.SYSTEM_ERROR,"删除失败或检查删除的是否是超级管理员");
     }
 
     @GetMapping("/managerByExample")
@@ -71,6 +72,9 @@ public class ManagerController
     @PostMapping("/addOne")
     public AjaxResponse addOneManager(@Validated Manager manager)
     {
+        //管理员姓名不能重复
+        Manager mname = managerService.getOne(new QueryWrapper<Manager>().eq("mname", manager.getMname()));
+        Assert.isNull(mname,"管理员姓名重复");
         //对密码进行加密操作
         String encode = passwordEncoder.encode(manager.getPassword());
         manager.setMpwd(encode);

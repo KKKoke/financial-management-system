@@ -44,6 +44,13 @@ public class ZkBankController
         return AjaxResponse.success(iBankService.list());
     }
 
+    @ApiOperation("返回当前银行名称下的所有银行")
+    @GetMapping("/getBanksUnderNowBankName")
+    public AjaxResponse getBanksUnderNowBankName(@RequestParam String bankName)
+    {
+        return AjaxResponse.success(iBankService.list(new QueryWrapper<Bank>().eq("bankName",bankName)));
+    }
+
 
     /**
      * <p>
@@ -90,11 +97,14 @@ public class ZkBankController
     public AjaxResponse addOneBankCard(Bank bank)
     {
         boolean save=false;
-        //银行卡不能重复
-        String num = bank.getNum();
-        Bank errorBank = iBankService.getOne(new QueryWrapper<Bank>().eq("num", num).eq("bankName",bank.getBankName()));
-        Assert.isNull(errorBank,"银行卡不能重复");
-        bank.setReduceBalance(bank.getComputerBalance().subtract(bank.getInfoBalance()));
+        if(!bank.getBankName().equals("现金"))
+        {
+            //银行卡不能重复
+            String num = bank.getNum();
+            Bank errorBank = iBankService.getOne(new QueryWrapper<Bank>().eq("bankName",bank.getBankName()));
+            Assert.isNull(errorBank,"银行卡不能重复");
+            bank.setReduceBalance(bank.getComputerBalance().subtract(bank.getInfoBalance()));
+        }
         synchronized (this)
         {
             save= iBankService.save(bank);
