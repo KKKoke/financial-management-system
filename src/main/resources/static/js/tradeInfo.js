@@ -104,7 +104,6 @@ function searchData() {
         var remark = $("#remark").val();
         var unit = $("#unit").val();
         var unitPrice = $("#unitPrice").val();
-
         if (company !== "") {
             pram.company = company;
         }
@@ -248,6 +247,10 @@ function addDeal() {
     var remark = $("#remark").val();
     var unit = $("#unit").val();
     var unitPrice = $("#unitPrice").val();
+    if (remark === "") {
+        alert("注名不能为空");
+        return;
+    }
     if (paytime === "") {
         alert("到账时间不能为空");
         return;
@@ -256,14 +259,26 @@ function addDeal() {
         alert("业务相关单位不能为空");
         return;
     }
-    if (bankName === "") {
-        alert("银行名称不能为空");
+    if (handler === "") {
+        alert("汇款单位经办人");
         return;
     }
-    if (num === "") {
-        alert("卡号不能为空");
+    if (payee === "") {
+        alert("收款单位不能为空");
         return;
     }
+    if (detail === "") {
+        alert("品名不能为空");
+        return;
+    }
+    // if (bankName === "") {
+    //     alert("银行名称不能为空");
+    //     return;
+    // }
+    // if (num === "") {
+    //     alert("卡号不能为空");
+    //     return;
+    // }
     if (money === "") {
         alert("金额不能为空");
         return;

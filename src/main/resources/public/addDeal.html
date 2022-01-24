@@ -24,7 +24,8 @@
     <div class="layui-row">
         <form class="layui-form">
             <div class="layui-form-item">
-                <label for="remark" class="layui-form-label">注明</label>
+                <label for="remark" class="layui-form-label">
+                    <span class="x-red">*</span>注明</label>
                 <div class="layui-input-inline">
                     <input type="text" id="remark" required="" autocomplete="off" class="layui-input"></div>
             </div>
@@ -41,13 +42,15 @@
                     <input type="text" id="company" required="" autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
-                <label for="handler" class="layui-form-label">汇款单位经办人</label>
+                <label for="handler" class="layui-form-label">
+                    <span class="x-red">*</span>汇款单位经办人</label>
                 <div class="layui-input-inline">
                     <input type="text" id="handler" required="" lay-verify="pass" autocomplete="off"
                            class="layui-input"></div>
             </div>
             <div class="layui-form-item">
-                <label for="payee" class="layui-form-label">收款单位</label>
+                <label for="payee" class="layui-form-label">
+                    <span class="x-red">*</span>收款单位</label>
                 <div class="layui-input-inline">
                     <input type="text" id="payee" required="" autocomplete="off" class="layui-input"></div>
             </div>
@@ -63,7 +66,8 @@
                     <input type="text" id="item" required="" autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
-                <label for="detail" class="layui-form-label">品名</label>
+                <label for="detail" class="layui-form-label">
+                    <span class="x-red">*</span>品名</label>
                 <div class="layui-input-inline">
                     <input type="text" id="detail" required="" lay-verify="pass" autocomplete="off"
                            class="layui-input"></div>
@@ -96,23 +100,23 @@
                     </div>
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label for="bankName" class="layui-form-label">
-                    <span class="x-red">*</span>银行名称</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="bankName" required="" lay-verify="pass"
-                           autocomplete="off" class="layui-input"></div>
-            </div>
-            <div class="layui-form-item">
-                <label for="num" class="layui-form-label">
-                    <span class="x-red">*</span>卡号</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="num" required="" autocomplete="off" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>银行卡后四位
-                </div>
-            </div>
+<!--            <div class="layui-form-item">-->
+<!--                <label for="bankName" class="layui-form-label">-->
+<!--                    <span class="x-red">*</span>银行名称</label>-->
+<!--                <div class="layui-input-inline">-->
+<!--                    <input type="text" id="bankName" required="" lay-verify="pass"-->
+<!--                           autocomplete="off" class="layui-input"></div>-->
+<!--            </div>-->
+<!--            <div class="layui-form-item">-->
+<!--                <label for="num" class="layui-form-label">-->
+<!--                    <span class="x-red">*</span>卡号</label>-->
+<!--                <div class="layui-input-inline">-->
+<!--                    <input type="text" id="num" required="" autocomplete="off" class="layui-input">-->
+<!--                </div>-->
+<!--                <div class="layui-form-mid layui-word-aux">-->
+<!--                    <span class="x-red">*</span>银行卡后四位-->
+<!--                </div>-->
+<!--            </div>-->
             <div class="layui-form-item">
                 <label for="money" class="layui-form-label">
                     <span class="x-red">*</span>金额</label>
