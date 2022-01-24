@@ -94,6 +94,7 @@ public class ZkBankController
         String num = bank.getNum();
         Bank errorBank = iBankService.getOne(new QueryWrapper<Bank>().eq("num", num).eq("bankName",bank.getBankName()));
         Assert.isNull(errorBank,"银行卡不能重复");
+        bank.setReduceBalance(bank.getComputerBalance().subtract(bank.getInfoBalance()));
         synchronized (this)
         {
             save= iBankService.save(bank);
