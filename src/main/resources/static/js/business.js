@@ -81,8 +81,8 @@ function addBank() {
         alert("信息余额不能为空");
         return;
     }
-    if (num === "") {
-        alert("卡号不能为空");
+    if (num.length != 4) {
+        alert("卡号只能输入后四位");
         return;
     }
 

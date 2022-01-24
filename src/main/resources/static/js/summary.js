@@ -56,7 +56,7 @@ function enterBank() {
         var table = layui.table;
         table.on('tool(bank)', function (obj) {
             var tr = obj.data;
-            window.localStorage.setItem("num", tr.num);
+            window.localStorage.setItem("bankName", tr.bankName);
             window.location.href = "http://localhost/bankTail.html";
         })
     });

@@ -3,10 +3,10 @@ layui.use(['table','form','layer'], function() {
     table.render({
         elem: '#banksDetail'
         , height: 600
-        , url: '/infos'
+        , url: '/getBanksUnderNowBankName'
         , method: 'get'
         , where: {
-            "num":window.localStorage.getItem("num")
+            "bankName":window.localStorage.getItem("bankName")
         }
         , cols: [
             [ //表头
