@@ -19,7 +19,7 @@ function AJAX(url,type,data,success)
         },
         error:function (res)
         {
-            alert("出现异常")
+                alert("出现异常")
         }
     });
 }

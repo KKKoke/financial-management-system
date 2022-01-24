@@ -5,10 +5,10 @@ spring:
     username: root
     password: 126433
     driver-class-name: com.mysql.cj.jdbc.Driver
-  thymeleaf:
-    cache: false
+#  thymeleaf:
+#    cache: false
 server:
-  port: 80
+  port:  80
   servlet:
     session:
       cookie:

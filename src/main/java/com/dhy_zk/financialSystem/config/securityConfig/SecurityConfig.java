@@ -56,6 +56,10 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
+
+        //关闭csrf防护
+        http.csrf().disable();
+
         //表单提交
         http.formLogin()
                 //自定义登录页面
@@ -80,9 +84,6 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
         http.headers().frameOptions().sameOrigin();
-
-        //关闭csrf防护
-        http.csrf().disable();
     }
 
     @Override

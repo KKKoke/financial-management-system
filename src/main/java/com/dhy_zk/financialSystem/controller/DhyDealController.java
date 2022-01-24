@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.Map;
 
 
 /**
@@ -48,6 +49,18 @@ public class DhyDealController
       BigDecimal debt=iDealService.computeDebtByCompanyName(companyName);
      return AjaxResponse.success(debt);
    }
+
+    /**
+     * <p>
+     *     返回所有公司的债务情况
+     * </p>
+     * @return
+     */
+    @GetMapping("/getAllCompanyDebts")
+    public AjaxResponse getCompanyDebt()
+    {
+        return AjaxResponse.success(iDealService.getAllCompanyDebts());
+    }
 
     /**
      * <p>
