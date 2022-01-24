@@ -256,6 +256,10 @@ function addDeal() {
         alert("业务相关单位不能为空");
         return;
     }
+    if (bankName === "") {
+        alert("银行名称不能为空");
+        return;
+    }
     if (num === "") {
         alert("卡号不能为空");
         return;
