@@ -19,6 +19,7 @@
         TOKEN_VERIFY();
     </script>
 </head>
+<!--<body onload="loadSelect()">-->
 <body>
 <div class="layui-fluid">
     <div class="layui-row">
@@ -106,6 +107,32 @@
 <!--                <div class="layui-input-inline">-->
 <!--                    <input type="text" id="bankName" required="" lay-verify="pass"-->
 <!--                           autocomplete="off" class="layui-input"></div>-->
+<!--            </div>-->
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">银行名称</label>
+                    <div class="layui-input-inline">
+                        <select id="bankName"></select>
+                    </div>
+                </div>
+            </div>
+<!--            <div class="layui-form-item">-->
+<!--                <label class="layui-form-label">银行名称</label>-->
+<!--                <div class="layui-input-block">-->
+<!--                    <select name="bankName" id="bankName" lay-filter="position">-->
+<!--&lt;!&ndash;                        <option value="1">收入</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <option value="0">支出</option>&ndash;&gt;-->
+<!--                    </select>-->
+<!--                    <div class="layui-unselect layui-form-select layui-form-selected">-->
+<!--                        <div class="layui-select-title">-->
+<!--                            <input type="text" placeholder="请选择" value="" readonly="" class="layui-input layui-unselect">-->
+<!--                            <i class="layui-edge"></i>-->
+<!--                        </div>-->
+<!--                        <dl class="layui-anim layui-anim-upbit" style="" id="bankName2">-->
+
+<!--                        </dl>-->
+<!--                    </div>-->
+<!--                </div>-->
 <!--            </div>-->
 <!--            <div class="layui-form-item">-->
 <!--                <label for="num" class="layui-form-label">-->
@@ -219,6 +246,69 @@
 </body>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/tradeInfo.js"></script>
+<script>
+    layui.use(['form'], function() {
+        var $ = layui.$,
+            form = layui.form;
+        $.ajax({
+            url: '/banks',
+            type: 'get',
+            headers: {
+                'wrnm':localStorage.wrnm
+            },
+            data: {},
+            success:function (res)
+            {
+                if(res.code!=200)
+                {
+                    if (res.message !== "") {
+                        alert(res.message);
+                    }
+                    else {
+                        alert("出现异常，请重试");
+                    }
+                }
+                //动态渲染下拉框
+                selectUtil.render({
+                    id: 'bankName',
+                    data: res.data
+                });
+            },
+            error:function (res)
+            {
+                if (res.message !== "") {
+                    alert(res.message);
+                }
+                else {
+                    alert("出现异常，请重试");
+                }
+            }
+        });
+    });
+</script>
+<script>
+    // 动态实现Layui下拉框工具方法
+    var selectUtil = {
+        render: function(param) {
+            var $ = layui.$,
+                form = layui.form;
+            var id = param.id,
+                prop = param.prop || {
+                    id: 'id',
+                    bankName: 'bankName'
+                },
+                datas = param.data || [];
+            var $select = $('#' + id);
+            //重置下拉框
+            $select.empty();
+            $.each(datas, function(index, item) {
+                var $option = $('<option value="' + item[prop.id] + '">' + item[prop.bankName] + '</option>');
+                $select.append($option);
+            });
+            form.render('select');
+        }
+    }
+</script>
 <script>
     layui.use('laydate', function () {
         var laydate = layui.laydate;
