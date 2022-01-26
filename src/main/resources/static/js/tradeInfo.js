@@ -220,9 +220,9 @@ function searchData() {
 
 function addDeal() {
     var pram = new Object();
+    var bank = JSON.parse(window.localStorage.getItem("bank"));
+    var index = $("#bankName").val();
 
-    var bankName = $("#bankName").val();
-    var bid = $("#bid").val();
     var byPeo = $("#byPeo").val();
     var company = $("#company").val();
     var computerBalance = $("#computerBalance").val();
@@ -291,12 +291,12 @@ function addDeal() {
     if (company !== "") {
         pram.company = company;
     }
-    if (bankName !== "") {
-        pram.bankName = bankName;
-    }
-    if (bid !== "") {
-        pram.bid = bid;
-    }
+    // if (bankName !== "") {
+    //     pram.bankName = bankName;
+    // }
+    // if (bid !== "") {
+    //     pram.bid = bid;
+    // }
     if (byPeo !== "") {
         pram.byPeo = byPeo;
     }
@@ -366,6 +366,14 @@ function addDeal() {
     if (unitPrice !== "") {
         pram.unitPrice = unitPrice;
     }
+    for (var i = 0; i < bank.length; i++) {
+        if (index == bank[i].id) {
+            pram.bankName = bank[i].bankName;
+            pram.num = bank[i].num;
+            pram.bid = bank[i].id;
+        }
+    }
+
     $.ajax({
         url: '/deals',
         type: 'post',

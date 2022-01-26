@@ -110,7 +110,7 @@
 <!--            </div>-->
             <div class="layui-form-item">
                 <div class="layui-inline">
-                    <label class="layui-form-label">银行名称</label>
+                    <label class="layui-form-label">银行名称及卡号</label>
                     <div class="layui-input-inline">
                         <select id="bankName"></select>
                     </div>
@@ -170,6 +170,8 @@
                 <div class="layui-input-inline">
                     <input type="text" id="infoBalance" required=""
                            lay-verify="pass" autocomplete="off" class="layui-input"></div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>如果银行是现金，可以不用填写此项</div>
             </div>
 <!--            <div class="layui-form-item">-->
 <!--                <label for="reduceBalance" class="layui-form-label">-->
@@ -268,6 +270,7 @@
                         alert("出现异常，请重试");
                     }
                 }
+                window.localStorage.setItem("bank", JSON.stringify(res.data));
                 //动态渲染下拉框
                 selectUtil.render({
                     id: 'bankName',
@@ -295,14 +298,19 @@
             var id = param.id,
                 prop = param.prop || {
                     id: 'id',
-                    bankName: 'bankName'
+                    bankName: 'bankName',
+                    num: 'num'
                 },
                 datas = param.data || [];
             var $select = $('#' + id);
             //重置下拉框
             $select.empty();
             $.each(datas, function(index, item) {
-                var $option = $('<option value="' + item[prop.id] + '">' + item[prop.bankName] + '</option>');
+                if (item[prop.bankName] === "现金") {
+                    var $option = $('<option value="' + item[prop.id] + '">' + item[prop.bankName] + ''+item[prop.id]+'</option>');
+                } else {
+                    var $option = $('<option value="' + item[prop.id] + '">' + item[prop.bankName] + ' '+item[prop.num]+'</option>');
+                }
                 $select.append($option);
             });
             form.render('select');
