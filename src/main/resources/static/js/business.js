@@ -16,8 +16,8 @@ layui.use(['table','form','layer'], function(){
         ,cols: [
             [ //表头
                 {field: 'id', title: '序号', width:250, sort: true, fixed: 'left'}
-                ,{field: 'leftMoney', title: '欠款', width: 250}
-                ,{field: 'company', title: '业务相关单位',width: 550}
+                ,{field: 'debt', title: '欠款', width: 250}
+                ,{field: 'companyName', title: '业务相关单位',width: 550}
                 ,{fixed: 'right',title: '操作', align:'center', toolbar: '#barDemo'}
             ]
         ]
