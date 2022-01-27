@@ -58,7 +58,8 @@ public class DealServiceImpl extends ServiceImpl<DealMapper, Deal> implements ID
         int i=1;
         for (Map.Entry<String, List<Deal>> entry : map.entrySet()) {
             BigDecimal reduce = entry.getValue().stream().map(x -> x.getLeftMoney()==null?new BigDecimal(0):x.getLeftMoney()).reduce(new BigDecimal(0), BigDecimal::add);
-            CompanyDebtVo.builder().id(i++).companyName(entry.getKey()).debt(reduce);
+            CompanyDebtVo companyDebtVo = CompanyDebtVo.builder().id(i++).companyName(entry.getKey()).debt(reduce).build();
+            res.add(companyDebtVo);
         }
         return res;
     }
