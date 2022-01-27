@@ -63,27 +63,42 @@ function business() {
     });
 }
 
-function addBank() {
-    var bankName = $("#bankName").val();
-    var computerBalance = $("#computerBalance").val();
-    var infoBalance = $("#infoBalance").val();
-    var num = $("#num").val();
+function addBank(type) {
+    var pram = new Object();
+    if (type === 1) {
+        var bankName = $("#bankName").val();
+        var computerBalance = $("#computerBalance").val();
+        var infoBalance = $("#infoBalance").val();
+        var num = $("#num").val();
 
-    if (bankName === "") {
-        alert("银行名称不能为空");
-        return;
-    }
-    if (computerBalance === "") {
-        alert("电脑余额不能为空");
-        return;
-    }
-    if (infoBalance === "") {
-        alert("信息余额不能为空");
-        return;
-    }
-    if (num.length != 4) {
-        alert("卡号只能输入后四位");
-        return;
+        if (bankName === "") {
+            alert("银行名称不能为空");
+            return;
+        }
+        if (computerBalance === "") {
+            alert("电脑余额不能为空");
+            return;
+        }
+        if (infoBalance === "") {
+            alert("信息余额不能为空");
+            return;
+        }
+        if (num.length != 4) {
+            alert("卡号只能输入后四位");
+            return;
+        }
+        pram.bankName = bankName;
+        pram.computerBalance = computerBalance;
+        pram.infoBalance = infoBalance;
+        pram.num = num;
+    } else {
+        var computerBalance = $("#computerBalance").val();
+        if (computerBalance === "") {
+            alert("电脑余额不能为空");
+            return;
+        }
+        pram.bankName = "现金";
+        pram.computerBalance = computerBalance;
     }
 
     $.ajax({
@@ -92,12 +107,7 @@ function addBank() {
         headers: {
             'wrnm':localStorage.wrnm
         },
-        data: {
-            "bankName": $("#bankName").val(),
-            "computerBalance": $("#computerBalance").val(),
-            "infoBalance": $("#infoBalance").val(),
-            "num": $("#num").val(),
-        },
+        data: pram,
         success:function (res)
         {
             if(res.code == 200)

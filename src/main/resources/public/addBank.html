@@ -39,8 +39,6 @@
                     <span class="x-red">*</span>信息余额</label>
                 <div class="layui-input-inline">
                     <input type="text" id="infoBalance" required="" lay-verify="pass" autocomplete="off" class="layui-input"></div>
-                <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>如果银行是现金，可以不用填写此项</div>
             </div>
             <div class="layui-form-item">
                 <label for="num" class="layui-form-label">
@@ -49,7 +47,7 @@
                     <input type="text" id="num" required="" lay-verify="pass" autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-mid layui-word-aux">
-                    <span class="x-red">*</span>银行卡后四位(如果银行是现金，不用填写此项)
+                    <span class="x-red">*</span>银行卡后四位
                 </div>
             </div>
 <!--            <div class="layui-form-item">-->
@@ -59,7 +57,7 @@
 <!--                    <input type="text" id="reduceBalance" required="" lay-verify="pass" autocomplete="off" class="layui-input"></div>-->
 <!--            </div>-->
         </form>
-        <button class="layui-btn" onclick="addBank()" style="margin-left:30px"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="addBank(1)" style="margin-left:30px"><i class="layui-icon"></i>添加</button>
     </div>
 </div>
 <script>var _hmt = _hmt || []; (function() {
