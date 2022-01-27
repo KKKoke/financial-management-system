@@ -260,7 +260,11 @@ function addDeal() {
         return;
     }
     if (handler === "") {
-        alert("汇款单位经办人");
+        alert("汇款单位经办人不能为空");
+        return;
+    }
+    if (receiver === "") {
+        alert("收款人不能为空");
         return;
     }
     if (payee === "") {
