@@ -63,7 +63,14 @@ function enterBank() {
 }
 
 function showDeal() {
-    window.location.href = "http://localhost/tradeInfo.html";
+    layui.use(['table'], function() {
+        var table = layui.table;
+        table.on('tool(bank)', function (obj) {
+            var tr = obj.data;
+            window.localStorage.setItem("id", tr.id);
+            window.location.href = "http://localhost/cardTail.html";
+        })
+    });
 }
 
 function total() {

@@ -57,7 +57,7 @@ function business() {
         var table = layui.table;
         table.on('tool(business)', function (obj) {
             var tr = obj.data;
-            window.localStorage.setItem("companyName", tr.company);
+            window.localStorage.setItem("companyName", tr.companyName);
             window.location.href = "http://localhost/company.html";
         })
     });
