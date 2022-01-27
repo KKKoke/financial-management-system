@@ -1,6 +1,7 @@
 package com.dhy_zk.financialSystem.service;
 
 import com.dhy_zk.financialSystem.domain.BDvo;
+import com.dhy_zk.financialSystem.domain.CompanyDebtVo;
 import com.dhy_zk.financialSystem.domain.Deal;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -23,5 +24,5 @@ public interface IDealService extends IService<Deal> {
 
     List<BDvo> listBD();
 
-    Map<String, BigDecimal> getAllCompanyDebts();
+    List<CompanyDebtVo> getAllCompanyDebts();
 }
