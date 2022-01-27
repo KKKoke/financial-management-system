@@ -1,6 +1,7 @@
 package com.dhy_zk.financialSystem.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.dhy_zk.financialSystem.domain.AbstarctBankWithMoneyVo;
 import com.dhy_zk.financialSystem.domain.Bank;
 import com.dhy_zk.financialSystem.msg.AjaxResponse;
 import com.dhy_zk.financialSystem.service.IBankService;
@@ -44,6 +45,7 @@ public class ZkBankController
         return AjaxResponse.success(iBankService.list());
     }
 
+
     @ApiOperation("返回当前银行名称下的所有银行")
     @GetMapping("/getBanksUnderNowBankName")
     public AjaxResponse getBanksUnderNowBankName(@RequestParam String bankName)
@@ -76,11 +78,12 @@ public class ZkBankController
     @GetMapping("/listBankOfTotalMoney")
     public AjaxResponse listAllBigBanks()
     {
-        List<BigDecimal> bankOfMoney=new ArrayList<>();
+        List<AbstarctBankWithMoneyVo> bankOfMoney=new ArrayList<>();
         Map<String, List<Bank>> map = iBankService.list().stream().collect(Collectors.groupingBy(Bank::getBankName));
         map.keySet().stream().forEach(bank->{
             BigDecimal bigDemical = map.get(bank).stream().map(x -> x.getComputerBalance()).reduce(new BigDecimal(0), BigDecimal::add);
-            bankOfMoney.add(bigDemical);
+            AbstarctBankWithMoneyVo build = AbstarctBankWithMoneyVo.builder().money(bigDemical).bankName(bank).build();
+            bankOfMoney.add(build);
         });
         return AjaxResponse.success(bankOfMoney);
     }
