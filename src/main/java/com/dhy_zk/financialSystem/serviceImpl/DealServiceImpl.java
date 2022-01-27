@@ -2,6 +2,7 @@ package com.dhy_zk.financialSystem.serviceImpl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dhy_zk.financialSystem.domain.BDvo;
+import com.dhy_zk.financialSystem.domain.CompanyDebtVo;
 import com.dhy_zk.financialSystem.domain.Deal;
 import com.dhy_zk.financialSystem.mapper.DealMapper;
 import com.dhy_zk.financialSystem.service.IDealService;
@@ -12,9 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.LongAdder;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -49,14 +52,14 @@ public class DealServiceImpl extends ServiceImpl<DealMapper, Deal> implements ID
     }
 
     @Override
-    public Map<String, BigDecimal> getAllCompanyDebts() {
+    public List<CompanyDebtVo> getAllCompanyDebts() {
         Map<String, List<Deal>> map = list().stream().collect(Collectors.groupingBy(deal -> deal.getCompany()));
-        Map<String, BigDecimal> res=new HashMap<>();
+        List<CompanyDebtVo> res=new ArrayList<>();
+        int i=1;
         for (Map.Entry<String, List<Deal>> entry : map.entrySet()) {
-            System.out.println(entry.getKey());
-            System.out.println(entry.getValue());
             BigDecimal reduce = entry.getValue().stream().map(x -> x.getLeftMoney()==null?new BigDecimal(0):x.getLeftMoney()).reduce(new BigDecimal(0), BigDecimal::add);
-            res.put(entry.getKey(),reduce);
+            CompanyDebtVo companyDebtVo = CompanyDebtVo.builder().id(i++).companyName(entry.getKey()).debt(reduce).build();
+            res.add(companyDebtVo);
         }
         return res;
     }

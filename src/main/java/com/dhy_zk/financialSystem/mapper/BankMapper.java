@@ -3,6 +3,7 @@ package com.dhy_zk.financialSystem.mapper;
 import com.dhy_zk.financialSystem.domain.BDvo;
 import com.dhy_zk.financialSystem.domain.Bank;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -22,6 +23,6 @@ public interface BankMapper extends BaseMapper<Bank> {
             "ON  d.id=bwd.d_id\n" +
             "INNER JOIN bank b\n" +
             "ON b.id=bwd.b_id\n"+
-            "WHERE b.num=#{num}")
-    List<BDvo> list(@Param("num") String num);
+            "WHERE b.id=#{id}")
+    List<BDvo> list(@Param("id") Integer id);
 }

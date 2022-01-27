@@ -79,6 +79,9 @@ public interface DealMapper extends BaseMapper<Deal> {
             "            <if test='receiver != null'>" +
             "            AND receiver = #{receiver}" +
             "            </if>"+
+            "            <if test='id != null'>" +
+            "            AND d.id = #{id}" +
+            "            </if>"+
             " </where>"+
             "</script>")
     List<BDvo> list(Deal deal);

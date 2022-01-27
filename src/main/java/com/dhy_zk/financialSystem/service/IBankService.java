@@ -3,6 +3,7 @@ package com.dhy_zk.financialSystem.service;
 import com.dhy_zk.financialSystem.domain.BDvo;
 import com.dhy_zk.financialSystem.domain.Bank;
 import com.baomidou.mybatisplus.extension.service.IService;
+import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -18,5 +19,5 @@ import java.util.List;
  */
 public interface IBankService extends IService<Bank> {
 
-    List<BDvo> list(String num);
+    List<BDvo> list(Integer id);
 }

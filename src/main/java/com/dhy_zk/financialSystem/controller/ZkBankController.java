@@ -8,6 +8,8 @@ import com.dhy_zk.financialSystem.service.IBankService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.models.auth.In;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -121,8 +123,8 @@ public class ZkBankController
      */
     @ApiOperation("查询当前银行卡上的所有消费记录")
     @GetMapping("/infos")
-    public AjaxResponse queryExtraInfo(@RequestParam String num)
+    public AjaxResponse queryExtraInfo(@ApiParam("银行卡id") @RequestParam Integer id)
     {
-        return AjaxResponse.success(iBankService.list(num));
+        return AjaxResponse.success(iBankService.list(id));
     }
 }
