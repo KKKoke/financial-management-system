@@ -3,6 +3,7 @@ package com.dhy_zk.financialSystem.controller;
 import com.dhy_zk.financialSystem.domain.Deal;
 import com.dhy_zk.financialSystem.msg.AjaxResponse;
 import com.dhy_zk.financialSystem.service.IDealService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +31,7 @@ public class DhyDealController
      * @param deal
      * @return
      */
+    @ApiOperation("按条件查询交易")
     @GetMapping("/getByExample")
     public AjaxResponse getDealsByExample(Deal deal)
     {
@@ -43,6 +45,7 @@ public class DhyDealController
      * @param companyName
      * @return
      */
+    @ApiOperation("根据公司名称计算债务情况")
     @GetMapping("/getDebtByCompanyName")
    public AjaxResponse getCompanyDebt(@RequestParam String companyName)
    {
@@ -56,6 +59,7 @@ public class DhyDealController
      * </p>
      * @return
      */
+    @ApiOperation("返回所有公司的债务情况")
     @GetMapping("/getAllCompanyDebts")
     public AjaxResponse getCompanyDebt()
     {
@@ -69,6 +73,7 @@ public class DhyDealController
      * @param companyName
      * @return
      */
+    @ApiOperation("根据公司名称获取详细的债务记录")
    @GetMapping("/getCompanyRecords")
    public AjaxResponse getCompanyRecords(@RequestParam String companyName)
    {

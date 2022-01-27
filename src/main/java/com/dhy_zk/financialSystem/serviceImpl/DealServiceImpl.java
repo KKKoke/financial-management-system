@@ -6,6 +6,7 @@ import com.dhy_zk.financialSystem.domain.Deal;
 import com.dhy_zk.financialSystem.mapper.DealMapper;
 import com.dhy_zk.financialSystem.service.IDealService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.sun.scenario.effect.impl.sw.java.JSWBlend_SRC_OUTPeer;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,12 +52,12 @@ public class DealServiceImpl extends ServiceImpl<DealMapper, Deal> implements ID
     public Map<String, BigDecimal> getAllCompanyDebts() {
         Map<String, List<Deal>> map = list().stream().collect(Collectors.groupingBy(deal -> deal.getCompany()));
         Map<String, BigDecimal> res=new HashMap<>();
-        map.entrySet().stream().forEach(
-         entry->{
-             BigDecimal reduce = entry.getValue().stream().map(x -> x.getLeftMoney()).reduce(new BigDecimal(0), BigDecimal::add);
-             res.put(entry.getKey(),reduce);
-         }
-        );
+        for (Map.Entry<String, List<Deal>> entry : map.entrySet()) {
+            System.out.println(entry.getKey());
+            System.out.println(entry.getValue());
+            BigDecimal reduce = entry.getValue().stream().map(x -> x.getLeftMoney()==null?new BigDecimal(0):x.getLeftMoney()).reduce(new BigDecimal(0), BigDecimal::add);
+            res.put(entry.getKey(),reduce);
+        }
         return res;
     }
 
