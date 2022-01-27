@@ -18,7 +18,7 @@ layui.use(['table','form','layer'], function(){
                 ,{field: 'company', title: '业务相关单位',width: 250}
                 ,{field: 'handler', title: '汇款单位经办人',width: 250}
                 ,{field: 'payee', title: '收款单位',width: 250}
-                ,{field: 'receivePeo', title: '收款人',width: 250}
+                ,{field: 'receiver', title: '收款人',width: 250}
                 ,{field: 'item', title: '用项',width: 250}
                 ,{field: 'detail', title: '品名',width: 250}
                 ,{field: 'payType', title: '收支',width: 250, templet:function(d){
@@ -30,7 +30,7 @@ layui.use(['table','form','layer'], function(){
                 ,{field: 'computerBalance', title: '电脑余额',width: 250}
                 ,{field: 'infoBalance', title: '信息余额',width: 250}
                 ,{field: 'reduceBalance', title: '余额差',width: 250}
-                ,{field: 'receiver', title: '收货人',width: 250}
+                ,{field: 'receivePeo', title: '收货人',width: 250}
                 ,{field: 'byPeo', title: '经办人',width: 250}
                 ,{field: 'unitPrice', title: '单价',width: 250}
                 ,{field: 'number', title: '数量',width: 250}

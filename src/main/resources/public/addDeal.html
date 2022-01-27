@@ -168,7 +168,7 @@
                 <label for="infoBalance" class="layui-form-label">
                     <span class="x-red">*</span>信息余额</label>
                 <div class="layui-input-inline">
-                    <input type="text" id="infoBalance" required=""
+                    <input type="text" id="infoBalance" required="false"
                            lay-verify="pass" autocomplete="off" class="layui-input"></div>
                 <div class="layui-form-mid layui-word-aux">
                     <span class="x-red">*</span>如果银行是现金，可以不用填写此项</div>
@@ -181,9 +181,15 @@
 <!--                           lay-verify="pass" autocomplete="off" class="layui-input"></div>-->
 <!--            </div>-->
             <div class="layui-form-item">
-                <label for="receiver" class="layui-form-label">收货人</label>
+                <label for="receiver" class="layui-form-label">收款人</label>
                 <div class="layui-input-inline">
                     <input type="text" id="receiver" required=""
+                           lay-verify="pass" autocomplete="off" class="layui-input"></div>
+            </div>
+            <div class="layui-form-item">
+                <label for="receiverPeo" class="layui-form-label">收货人</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="receiverPeo" required=""
                            lay-verify="pass" autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
