@@ -5,6 +5,7 @@ import com.dhy_zk.financialSystem.domain.Bank;
 import com.dhy_zk.financialSystem.mapper.BankMapper;
 import com.dhy_zk.financialSystem.service.IBankService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.swagger.models.auth.In;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +27,7 @@ public class BankServiceImpl extends ServiceImpl<BankMapper, Bank> implements IB
      @Resource
      private BankMapper bankMapper;
     @Override
-    public List<BDvo> list(String num) {
-        return bankMapper.list(num);
+    public List<BDvo> list(Integer id) {
+        return bankMapper.list(id);
     }
 }
