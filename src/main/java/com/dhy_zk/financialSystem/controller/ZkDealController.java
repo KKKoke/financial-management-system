@@ -75,6 +75,7 @@ public class ZkDealController
         //如果是银行卡
         if(!bank.getBankName().equals("现金"))
         {
+            Assert.notNull(bdvo.getInfoBalance(),"信息余额不能为空");
             //如果输入的信息余额和保存的电脑余额不一致，就更新电脑余额
             if(bank.getComputerBalance().compareTo(bdvo.getInfoBalance())!=0)
             {
