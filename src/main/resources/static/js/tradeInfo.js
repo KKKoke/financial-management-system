@@ -283,11 +283,6 @@ function addDeal() {
         alert("金额不能为空");
         return;
     }
-    if (infoBalance === "") {
-        alert("信息余额不能为空");
-        return;
-    }
-
     if (company !== "") {
         pram.company = company;
     }
