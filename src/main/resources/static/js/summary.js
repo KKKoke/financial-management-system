@@ -8,7 +8,7 @@ layui.use(['table','form','layer'], function(){
     table.render({
         elem: '#banksData'
         ,height: 600
-        ,url: '/banks'
+        ,url: '/listBankOfTotalMoney'
         ,method:'get'
         ,where: {
 
@@ -16,7 +16,7 @@ layui.use(['table','form','layer'], function(){
         ,cols: [
             [ //表头
                 {field: 'bankName', title: '银行名称', width: 450}
-                ,{field: 'computerBalance', title: '总余额', width: 450}
+                ,{field: 'money', title: '总余额', width: 450}
                 ,{title: '操作', align:'center', toolbar: '#barDemo'}
             ]
         ]
@@ -89,11 +89,10 @@ function total() {
         },
         error:function (res)
         {
-            if (res.message !== "") {
-                alert(res.message);
-            }
-            else {
+            if (res.responseJSON === "") {
                 alert("出现异常，请重试");
+            } else {
+                alert(res.responseJSON.message);
             }
         }
     });

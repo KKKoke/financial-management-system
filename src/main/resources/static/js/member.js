@@ -99,7 +99,11 @@ function addMember() {
                 if (res.code == 200) {
                     alert("添加成功");
                 } else {
-                    if (res.message !== "") {
+                    alert("fuck");
+                    alert(res.message);
+                    alert(res.message != "");
+                    alert(res.message !== "")
+                    if (res.message != "") {
                         alert(res.message);
                     }
                     else {
@@ -108,11 +112,10 @@ function addMember() {
                 }
             },
             error:function (res) {
-                if (res.message !== "") {
-                    alert(res.message);
-                }
-                else {
+                if (res.responseJSON === "") {
                     alert("出现异常，请重试");
+                } else {
+                    alert(res.responseJSON.message);
                 }
             }
         });
@@ -142,11 +145,10 @@ function delMember() {
             }
         },
         error: function (res) {
-            if (res.message !== "") {
-                alert(res.message);
-            }
-            else {
+            if (res.responseJSON === "") {
                 alert("出现异常，请重试");
+            } else {
+                alert(res.responseJSON.message);
             }
         }
     });

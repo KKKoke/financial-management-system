@@ -8,7 +8,7 @@ layui.use(['table','form','layer'], function(){
     table.render({
         elem: '#businessData'
         ,height: 600
-        ,url: '/deals'
+        ,url: '/getAllCompanyDebts'
         ,method:'get'
         ,where: {
 
@@ -114,11 +114,10 @@ function addBank() {
         },
         error:function (res)
         {
-            if (res.message !== "") {
-                alert(res.message);
-            }
-            else {
+            if (res.responseJSON === "") {
                 alert("出现异常，请重试");
+            } else {
+                alert(res.responseJSON.message);
             }
         }
     });
