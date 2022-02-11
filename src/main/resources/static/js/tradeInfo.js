@@ -14,7 +14,9 @@ layui.use(['table','form','layer'], function(){
             [ //表头
                 {field: 'id', title: '交易编号', width:250, sort: true, fixed: 'left'}
                 ,{field: 'remark', title: '注明', width: 250}
-                ,{field: 'paytime', title: '到账时间',width: 250}
+                ,{field: 'paytime', title: '到账时间',width: 250, templet:function(d){
+                    return layui.util.toDateString(d.paytime,'yyyy-MM-dd HH:mm:ss');
+                }}
                 ,{field: 'company', title: '业务相关单位',width: 250}
                 ,{field: 'handler', title: '汇款单位经办人',width: 250}
                 ,{field: 'payee', title: '收款单位',width: 250}
