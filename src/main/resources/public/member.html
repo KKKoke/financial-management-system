@@ -45,6 +45,11 @@
                 </div>
                 <div class="layui-card-body layui-table-main layui-table-body">
                     <table id="memberData" class="layui-table layui-form" lay-filter="member">
+                        <script type="text/html" id="member">
+<!--                            <a class="layui-btn layui-btn-normal" lay-event="member"-->
+<!--                               onclick="norUserToUpdateMember()">修改</a>-->
+                            <a class="layui-btn layui-btn-danger" lay-event="member" onclick="delMember()">删除</a>
+                        </script>
                     </table>
                 </div>
             </div>

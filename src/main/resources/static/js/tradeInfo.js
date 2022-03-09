@@ -41,6 +41,7 @@ layui.use(['table','form','layer'], function(){
                 ,{field: 'realMoney', title: '实收金额',width: 250}
                 ,{field: 'leftMoney', title: '余款',width: 250}
                 ,{field: 'infoMark', title: '备注',width: 250}
+                ,{title: '操作', align: 'center', width: 80, toolbar: '#deal'}
             ]
         ]
         , id: 'tableOne'
@@ -409,33 +410,50 @@ function addDeal() {
 }
 
 function delDeal() {
-    $.ajax({
-        url: '/deals',
-        type: 'delete',
-        headers: {
-            'wrnm': localStorage.wrnm
-        },
-        data: {
-            "id": $("#id").val(),
-        },
-        success: function (res) {
-            if (res.code == 200) {
-                alert("删除成功");
-            } else {
-                if (res.message !== "") {
-                    alert(res.message);
+    layui.use('layer', function () {
+        var $ = layui.jquery;
+        // 删除操作
+        layui.use(['table'], function () {
+            var table = layui.table;
+            table.on('tool(deal)', function (obj) {
+                var tr = obj.data;
+                var msg = "您真的确定要删除吗？";
+                if (confirm(msg) === true) {
+                    $.ajax({
+                        url: '/deals',
+                        type: 'delete',
+                        headers: {
+                            'wrnm': localStorage.wrnm
+                        },
+                        data: {
+                            "id": tr.id
+                        },
+                        success: function (res) {
+                            if (res.code == 200) {
+                                alert("删除成功");
+                                location.reload();
+                            } else {
+                                if (res.message !== "") {
+                                    alert(res.message);
+                                    location.reload();
+                                }
+                                else {
+                                    alert("出现异常，请重试");
+                                }
+                            }
+                        },
+                        error: function (res) {
+                            if (res.responseJSON === "") {
+                                alert("出现异常，请重试");
+                            } else {
+                                alert(res.responseJSON.message);
+                            }
+                        }
+                    });
+                } else {
+                    return false;
                 }
-                else {
-                    alert("出现异常，请重试");
-                }
-            }
-        },
-        error: function (res) {
-            if (res.responseJSON === "") {
-                alert("出现异常，请重试");
-            } else {
-                alert(res.responseJSON.message);
-            }
-        }
-    });
+            })
+        });
+    })
 }

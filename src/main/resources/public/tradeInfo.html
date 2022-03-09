@@ -131,7 +131,12 @@
                     </div>
                 </script>
                 <div class="layui-card-body layui-table-main layui-table-body">
-                    <table id="DealData" class="layui-table layui-form" lay-filter="table">
+                    <table id="DealData" class="layui-table layui-form" lay-filter="deal">
+                        <script type="text/html" id="deal">
+                            <!--                            <a class="layui-btn layui-btn-normal" lay-event="member"-->
+                            <!--                               onclick="norUserToUpdateMember()">修改</a>-->
+                            <a class="layui-btn layui-btn-danger" lay-event="deal" onclick="delDeal()">删除</a>
+                        </script>
                     </table>
                 </div>
             </div>
