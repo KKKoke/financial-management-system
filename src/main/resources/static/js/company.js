@@ -9,13 +9,14 @@ layui.use(['table','form','layer'], function() {
         elem: '#businessData'
         , height: 600
         , url: '/getCompanyRecords'
+        , even: true
         , method: 'get'
         , where: {
             "companyName":window.localStorage.getItem("companyName")
         }
         , cols: [
             [ //表头
-                {field: 'id', title: '交易编号', width:250, sort: true, fixed: 'left'}
+                {field: 'id', title: '交易编号', width: 50, sort: true, fixed: 'left'}
                 ,{field: 'company', title: '业务相关单位',width: 250}
                 ,{field: 'remark', title: '注明', width: 250}
                 ,{field: 'paytime', title: '到账时间',width: 250, templet:function(d){
@@ -79,7 +80,7 @@ layui.use(['table','form','layer'], function() {
         var checkStatus = table.checkStatus(obj.config.id);
         switch(obj.event){
             case 'back':
-                window.location.href = "http://localhost/businessUnitTransactions.html";
+                window.location.href = "http://localhost:8090/businessUnitTransactions.html";
                 break;
         };
     });

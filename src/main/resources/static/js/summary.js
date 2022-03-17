@@ -9,6 +9,7 @@ layui.use(['table','form','layer'], function(){
         elem: '#banksData'
         ,height: 600
         ,url: '/listBankOfTotalMoney'
+        ,even: true
         ,method:'get'
         ,where: {
 
@@ -17,7 +18,7 @@ layui.use(['table','form','layer'], function(){
             [ //表头
                 {field: 'bankName', title: '银行名称', width: 450}
                 ,{field: 'money', title: '总余额', width: 450}
-                ,{title: '操作', align:'center', toolbar: '#barDemo'}
+                ,{title: '操作', align:'center', width: 100, toolbar: '#barDemo'}
             ]
         ]
         ,page: true //开启分页
@@ -57,7 +58,7 @@ function enterBank() {
         table.on('tool(bank)', function (obj) {
             var tr = obj.data;
             window.localStorage.setItem("bankName", tr.bankName);
-            window.location.href = "http://localhost/bankTail.html";
+            window.location.href = "http://localhost:8090/bankTail.html";
         })
     });
 }
@@ -68,7 +69,7 @@ function showDeal() {
         table.on('tool(bank)', function (obj) {
             var tr = obj.data;
             window.localStorage.setItem("id", tr.id);
-            window.location.href = "http://localhost/cardTail.html";
+            window.location.href = "http://localhost:8090/cardTail.html";
         })
     });
 }

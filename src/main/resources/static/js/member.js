@@ -9,11 +9,12 @@ layui.use(['table','form','layer'], function() {
         elem: '#memberData'
         , height: 600
         , url: '/manager'
+        , even: true
         , method: 'get'
         , where: {}
         , cols: [
             [ //表头
-                {field: 'id', title: '编号', width:250, sort: true, fixed: 'left'}
+                {field: 'id', title: '编号', width: 50, sort: true, fixed: 'left'}
                 ,{field: 'mname', title: '管理员姓名',width: 250}
                 ,{field: 'mpwd', title: '管理员密码', width: 250, templet:function(d){
                     return d.mpwd=='*'?'**********':'**********';}}

@@ -4,6 +4,7 @@ layui.use(['table','form','layer'], function() {
         elem: '#banksDetail'
         , height: 600
         , url: '/getBanksUnderNowBankName'
+        , even: true
         , method: 'get'
         , where: {
             "bankName":window.localStorage.getItem("bankName")
@@ -51,7 +52,7 @@ layui.use(['table','form','layer'], function() {
         var checkStatus = table.checkStatus(obj.config.id);
         switch(obj.event){
             case 'back':
-                window.location.href = "http://localhost/summaryBanks.html";
+                window.location.href = "http://localhost:8090/summaryBanks.html";
                 break;
         };
     });

@@ -9,16 +9,17 @@ layui.use(['table','form','layer'], function(){
         elem: '#businessData'
         ,height: 600
         ,url: '/getAllCompanyDebts'
+        ,even: true
         ,method:'get'
         ,where: {
 
         }
         ,cols: [
             [ //表头
-                {field: 'id', title: '序号', width:250, sort: true, fixed: 'left'}
+                {field: 'id', title: '序号', width: 50, sort: true, fixed: 'left'}
                 ,{field: 'debt', title: '欠款', width: 250}
-                ,{field: 'companyName', title: '业务相关单位',width: 550}
-                ,{fixed: 'right',title: '操作', align:'center', toolbar: '#barDemo'}
+                ,{field: 'companyName', title: '业务相关单位',width: 250}
+                ,{fixed: 'right',title: '操作', align:'center', width: 80, toolbar: '#barDemo'}
             ]
         ]
         , toolbar: '#toolbar'
@@ -58,7 +59,7 @@ function business() {
         table.on('tool(business)', function (obj) {
             var tr = obj.data;
             window.localStorage.setItem("companyName", tr.companyName);
-            window.location.href = "http://localhost/company.html";
+            window.location.href = "http://localhost:8090/company.html";
         })
     });
 }
@@ -132,5 +133,3 @@ function addBank(type) {
         }
     });
 }
-
-
